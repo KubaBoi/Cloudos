@@ -69,6 +69,7 @@ class Server(BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header("Content-type", "text/html")
             self.end_headers()
+            self.wfile.write(b"Soubor nebyl nalezen :(")
             return
 
         self.send_response(200)
