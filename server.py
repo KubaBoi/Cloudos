@@ -9,7 +9,6 @@ import os
 import cgi
 import io
 import math
-import urllib3
 from urllib.parse import unquote 
 
 hostName = "localhost"
