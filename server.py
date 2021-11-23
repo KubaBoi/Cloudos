@@ -9,7 +9,7 @@ import os
 import cgi
 import io
 import math
-from urllib.parse import unquote 
+from urllib.parse import unquote
 
 hostName = "localhost"
 hostPort = 8000
@@ -123,6 +123,10 @@ class Server(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
+    if not os.path.exists("web/files"):
+        os.makedirs("web/files")
+
+
     myServer = HTTPServer((hostName, hostPort), Server)
     print(time.asctime(), "Server Starts - %s:%s" % (hostName, hostPort))
 
