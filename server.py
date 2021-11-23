@@ -11,7 +11,7 @@ import io
 import math
 from urllib.parse import unquote
 
-hostName = "localhost"
+hostName = "0.0.0.0"
 hostPort = 8000
 
 class Server(BaseHTTPRequestHandler):
