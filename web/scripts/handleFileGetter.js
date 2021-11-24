@@ -24,21 +24,27 @@ function addRow(data) {
 
     var row = document.createElement("tr");
 
+    var cellIcon = document.createElement("td");
     var cellName = document.createElement("td");
     var cellDate = document.createElement("td");
     var cellSize = document.createElement("td");
     var cellDownload = document.createElement("td");
     var cellRemove = document.createElement("td");
 
+    var iconSize = 30;
+
+    cellIcon.innerHTML = "<img src=\"/images/" + type + "Icon.png\" alt=\"typeIcon\" width=" + iconSize + " heigth=" + iconSize +">";
     cellName.innerHTML = "<a href=\"/files/" + name + "\">" + name + "</a>";
     cellDate.innerHTML = date;
     cellSize.innerHTML = size;
-    cellDownload.innerHTML = "<a href=\"/files/" + name + "\" download=\"" + name + "\"><img src=\"/images/downloadIcon.png\" width=20 heigth=20></a>";
-    cellRemove.innerHTML = "<img src=\"/images/removeIcon.png\" onclick=\"removeFile('" + name + "')\" width=20 heigth=20>";
+    cellDownload.innerHTML = "<a href=\"/files/" + name + "\" download=\"" + name + "\"><img src=\"/images/downloadIcon.png\" alt=\"downloadIcon\" width=" + iconSize + " heigth=" + iconSize +"></a>";
+    cellRemove.innerHTML = "<img src=\"/images/removeIcon.png\" onclick=\"removeFile('" + name + "')\" alt=\"removeIcon\" width=" + iconSize + " heigth=" + iconSize +">";
 
+    cellIcon.setAttribute("style", "width: 1%");
     cellDownload.setAttribute("style", "width: 1%;");
     cellRemove.setAttribute("style", "width: 1%;");
 
+    row.appendChild(cellIcon);
     row.appendChild(cellName);
     row.appendChild(cellDate);
     row.appendChild(cellSize);
@@ -64,6 +70,7 @@ function formatDate(unixTime) {
 function addHeadRow() {
     var row = document.createElement("tr");
 
+    var cellIcon = document.createElement("th");
     var cellName = document.createElement("th");
     var cellDate = document.createElement("th");
     var cellSize = document.createElement("th");
@@ -72,6 +79,7 @@ function addHeadRow() {
     cellDate.innerHTML = "Čas uploadu";
     cellSize.innerHTML = "Velikost";
 
+    row.appendChild(cellIcon);
     row.appendChild(cellName);
     row.appendChild(cellDate);
     row.appendChild(cellSize);

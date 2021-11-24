@@ -11,6 +11,8 @@ import io
 import math
 from urllib.parse import unquote
 
+from iconFinder import IconFinder
+
 hostName = "0.0.0.0"
 hostPort = 8000
 
@@ -20,6 +22,8 @@ class Server(BaseHTTPRequestHandler):
             self.sendFile("/index.html")
         elif (self.path == "/sheet.css"):
             self.sendFile("/sheet.css", "text/css")
+        elif (self.path.endswith("Icon.png")):
+            self.sendIcon(self.path)
 
         elif (self.path == "/getFiles"):
             self.getFiles()
@@ -79,16 +83,25 @@ class Server(BaseHTTPRequestHandler):
         with open(f"{os.path.dirname(__file__)}/web{file}", "rb") as f:
             self.wfile.write(f.read())
 
+    def sendIcon(self, icon):
+        icon = unquote(icon)
+
+        if (not path.exists(f"{os.path.dirname(__file__)}/web{icon}")):
+            self.sendFile("/images/unknownIcon.png")
+        else:
+            self.sendFile(icon)
+
     #return array of files on server
     def getFiles(self):
         data = []
         for (dirpath, dirnames, filenames) in walk(f"{os.path.dirname(__file__)}/web/files"):
+            iconFinder = IconFinder()
             for f in filenames:
                 data.append(
                     {
                         "filename": f,
                         "size": self.convertBytes(os.path.getsize(f"{os.path.dirname(__file__)}/web/files/{f}")),
-                        "type": f.split(".")[-1],
+                        "type": iconFinder.find(f),
                         "date": os.path.getatime(f"{os.path.dirname(__file__)}/web/files/{f}")
                     }
                 )
