@@ -30,5 +30,7 @@
     "rar": "zip",
     "zip": "zip",
     "arj": "zip",
-    "iso": "iso"
+    "iso": "iso",
+    "exe": "exe",
+    "msi": "exe"
 }
