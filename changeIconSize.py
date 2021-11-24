@@ -21,4 +21,4 @@ def create(name, size):
     newIm.save("frogieCloud.png")
 
 
-create("web/images/favicon.png", 10)
+create("web/images/sadFrog.png", 10)

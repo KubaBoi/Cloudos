@@ -1,6 +1,7 @@
 var table = document.querySelector("#tableId");
 var allData = "";
 var jsonData = "";
+var iconSize = 30;
 
 function getFiles() {
     var xhttp = new XMLHttpRequest();
@@ -36,8 +37,6 @@ function addRow(data) {
     var cellSize = document.createElement("td");
     var cellDownload = document.createElement("td");
     var cellRemove = document.createElement("td");
-
-    var iconSize = 30;
 
     cellIcon.innerHTML = "<img src=\"/images/" + type + "Icon.png\" alt=\"typeIcon\" width=" + iconSize + " heigth=" + iconSize +">";
     cellName.innerHTML = "<a href=\"/files/" + name + "\" target=\"_blank\">" + name + "</a>";
@@ -96,12 +95,10 @@ function addHeadRow() {
 function noFiles() {
     var row = document.createElement("tr");
 
-    var cellIcon = document.createElement("td");
     var cellName = document.createElement("td");
 
-    cellName.innerHTML = "Nenašel jsem žádné soubory :(";
+    cellName.innerHTML = "<img src=\"/images/sadFrog.png\" alt=\"typeIcon\"> Nenašel jsem žádné soubory :(";
 
-    row.appendChild(cellIcon);
     row.appendChild(cellName);
 
     table.appendChild(row);
