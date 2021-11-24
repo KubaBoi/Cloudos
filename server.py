@@ -97,10 +97,12 @@ class Server(BaseHTTPRequestHandler):
         for (dirpath, dirnames, filenames) in walk(f"{os.path.dirname(__file__)}/web/files"):
             iconFinder = IconFinder()
             for f in filenames:
+                byteSize = os.path.getsize(f"{os.path.dirname(__file__)}/web/files/{f}")
                 data.append(
                     {
                         "filename": f,
-                        "size": self.convertBytes(os.path.getsize(f"{os.path.dirname(__file__)}/web/files/{f}")),
+                        "size": self.convertBytes(byteSize),
+                        "byteSize": byteSize,
                         "type": iconFinder.find(f),
                         "date": os.path.getatime(f"{os.path.dirname(__file__)}/web/files/{f}")
                     }

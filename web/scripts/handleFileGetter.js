@@ -1,14 +1,18 @@
 var table = document.querySelector("#tableId");
+var jsonData = "";
 
 function getFiles() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            json = JSON.parse(this.responseText);
+            jsonData = JSON.parse(this.responseText);
+            
+            sort();
+            
             table.innerHTML = "";
             addHeadRow();
-            for (var i = 0; i < json.length; i++) {
-                addRow(json[i]);
+            for (var i = 0; i < jsonData.length; i++) {
+                addRow(jsonData[i]);
             } 
         }
     };
