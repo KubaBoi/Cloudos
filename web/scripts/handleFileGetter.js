@@ -92,3 +92,17 @@ function addHeadRow() {
 
     table.appendChild(row);
 }
+
+function noFiles() {
+    var row = document.createElement("tr");
+
+    var cellIcon = document.createElement("td");
+    var cellName = document.createElement("td");
+
+    cellName.innerHTML = "Nenašel jsem žádné soubory :(";
+
+    row.appendChild(cellIcon);
+    row.appendChild(cellName);
+
+    table.appendChild(row);
+}

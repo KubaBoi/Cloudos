@@ -16,7 +16,12 @@ function sort() {
     }
 
     table.innerHTML = "";
-    addHeadRow();
+    if (jsonData.length == 0) {
+        noFiles();
+    }
+    else {
+        addHeadRow();
+    }
     for (var i = 0; i < jsonData.length; i++) {
         addRow(jsonData[i]);
     } 
