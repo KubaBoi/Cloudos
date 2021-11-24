@@ -34,7 +34,7 @@ function addRow(data) {
     var iconSize = 30;
 
     cellIcon.innerHTML = "<img src=\"/images/" + type + "Icon.png\" alt=\"typeIcon\" width=" + iconSize + " heigth=" + iconSize +">";
-    cellName.innerHTML = "<a href=\"/files/" + name + "\">" + name + "</a>";
+    cellName.innerHTML = "<a href=\"/files/" + name + "\" target=\"_blank\">" + name + "</a>";
     cellDate.innerHTML = date;
     cellSize.innerHTML = size;
     cellDownload.innerHTML = "<a href=\"/files/" + name + "\" download=\"" + name + "\"><img src=\"/images/downloadIcon.png\" alt=\"downloadIcon\" width=" + iconSize + " heigth=" + iconSize +"></a>";
