@@ -54,9 +54,9 @@ class Server(BaseHTTPRequestHandler):
             try:
                 if isinstance(form["file"], list):
                     for record in form["file"]:
-                        open("./web/files/%s"%record.filename, "wb").write(record.file.read())
+                        open(f"{os.path.dirname(__file__)}/" + "web/files/%s"%record.filename, "wb").write(record.file.read())
                 else:
-                    open("./web/files/%s"%form["file"].filename, "wb").write(form["file"].file.read())
+                    open(f"{os.path.dirname(__file__)}/" + "web/files/%s"%form["file"].filename, "wb").write(form["file"].file.read())
             except IOError:
                     return (False, "Can't create file to write, do you have permission to write?")
         return (True, "Files uploaded")
@@ -65,7 +65,7 @@ class Server(BaseHTTPRequestHandler):
     def sendFile(self, file, header = "text/html"):
         file = unquote(file)
         
-        if (not path.exists(f"web{file}")):
+        if (not path.exists(f"{os.path.dirname(__file__)}/web{file}")):
             self.send_response(404)
             self.send_header("Content-type", "text/html")
             self.end_headers()
@@ -76,20 +76,20 @@ class Server(BaseHTTPRequestHandler):
         self.send_header("Content-type", header)
         self.end_headers()
 
-        with open(f"web{file}", "rb") as f:
+        with open(f"{os.path.dirname(__file__)}/web{file}", "rb") as f:
             self.wfile.write(f.read())
 
     #return array of files on server
     def getFiles(self):
         data = []
-        for (dirpath, dirnames, filenames) in walk("web/files"):
+        for (dirpath, dirnames, filenames) in walk(f"{os.path.dirname(__file__)}/web/files"):
             for f in filenames:
                 data.append(
                     {
                         "filename": f,
-                        "size": self.convertBytes(os.path.getsize(f"web/files/{f}")),
+                        "size": self.convertBytes(os.path.getsize(f"{os.path.dirname(__file__)}/web/files/{f}")),
                         "type": f.split(".")[-1],
-                        "date": os.path.getatime(f"web/files/{f}")
+                        "date": os.path.getatime(f"{os.path.dirname(__file__)}/web/files/{f}")
                     }
                 )
 
@@ -101,16 +101,16 @@ class Server(BaseHTTPRequestHandler):
     
     #delete file
     def getDelete(self, file):
-        file = file.replace("%20", " ")
+        file = unquote(file)
         file = file.replace("/delete", "")
         
-        if (not path.exists(f"web{file}")):
+        if (not path.exists(f"{os.path.dirname(__file__)}/web{file}")):
             self.send_response(404)
             self.send_header("Content-type", "text/html")
             self.end_headers()
             return
 
-        os.remove(f"web{file}")
+        os.remove(f"{os.path.dirname(__file__)}/web{file}")
         self.sendFile("/reconnect.html")
 
     def convertBytes(self, bytes):
@@ -124,8 +124,8 @@ class Server(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    if not os.path.exists("web/files"):
-        os.makedirs("web/files")
+    if not os.path.exists(f"{os.path.dirname(__file__)}/web/files"):
+        os.makedirs(f"{os.path.dirname(__file__)}/web/files")
 
 
     myServer = HTTPServer((hostName, hostPort), Server)
