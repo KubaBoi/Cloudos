@@ -63,13 +63,12 @@ function formatDate(unixTime) {
     var date = new Date(unixTime * 1000);
 
     var year = date.getFullYear();
-    var month = date.getMonth();
-    var day = date.getDay();
-    var hours = date.getHours();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hours = "0" + date.getHours();
     var minutes = "0" + date.getMinutes();
 
-    // Will display time in 10:30:23 format
-    return  day + "." + month + "." + year + " " + hours + ':' + minutes.substr(-2);
+    return  day + "." + month + "." + year + " " + hours.substr(-2) + ':' + minutes.substr(-2);
 }
 
 function addHeadRow() {
