@@ -14,6 +14,7 @@
     </form>
     <hr>
     <button onclick="getFiles()">Aktualizovat</button>
+
     <label> Řadit podle: </label>
     <select name="sorted" id="sorted" onchange="sort()">
         <option value="name">Jméno</option>
@@ -25,12 +26,16 @@
         <option value=1>Vzestupně</option>
         <option value=-1>Sestupně</option>
     </select>
+
+    <input type="text" name="search" id="search" placeholder="Napiš název souboru">
+
     <hr>
     <table id="tableId"></table>
 
-    <script src="scripts/fileManager.js"></script>
-    <script src="scripts/removeFile.js"></script>
     <script src="scripts/handleFileGetter.js"></script>
+    <script src="scripts/sortManager.js"></script>
+    <script src="scripts/searchManager.js"></script>
+    <script src="scripts/removeFile.js"></script>
 
     <script>
         getFiles();

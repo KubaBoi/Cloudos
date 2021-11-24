@@ -1,4 +1,5 @@
 var table = document.querySelector("#tableId");
+var allData = "";
 var jsonData = "";
 
 function getFiles() {
@@ -6,6 +7,7 @@ function getFiles() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             jsonData = JSON.parse(this.responseText);
+            allData = jsonData;
             
             sort();
             
